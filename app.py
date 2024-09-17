@@ -8,6 +8,10 @@ import numpy as np
 
 app = flask.Flask(__name__)
 
+@app.route("/")
+def index():
+    return " Hello, World!"
+
 @app.route("/log_model")
 def log_model():
     word_embeddings = pd.read_csv('glove.6B.50d.txt.zip',
