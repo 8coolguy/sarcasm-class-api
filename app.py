@@ -5,8 +5,10 @@ import pandas as pd
 from collections import OrderedDict
 import sklearn
 import numpy as np
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
+CORS(app)
 
 @app.route("/")
 def index():
