@@ -1,16 +1,38 @@
 <html>
 	<head>
 		<title>Sarcasm Classifier</title>
+		<style>
+			.loader-container {
+			    width: 100%;
+			    height: 100vh;
+			    position: fixed;
+			    background: #fff
+				url("https://media.giphy.com/media/8agqybiK5LW8qrG3vJ/giphy.gif") center
+				no-repeat;
+			    z-index: 1;
+			    visibility: hidden; 
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Sarcasm Classifier</h1>
-		<div>
+		<div class ="loader-container"></div>
+		<div class ="">
 			<label for="text">Text:</label><br>
 			<textarea name="text" id="text" rows="4" cols="50"></textarea><br>
 			<button onclick="classify()"> Classify </button>
 		</div>
 		<script>
+			const loaderContainer = document.querySelector('.loader-container');
+			const displayLoading = () => {
+			    loaderContainer.style.visibility = 'visible';
+			};
+
+			const hideLoading = () => {
+			    loaderContainer.style.visibility = 'hidden';
+			};
 			async function classify() {
+				displayLoading();
 				const response = await fetch('https://sarcasmclassapi-ejnrv1p5.b4a.run/log_model?inputText=' + document.getElementById('text').value, {
 					method: 'GET',
 					headers: {
@@ -24,6 +46,7 @@
 				}else{
 					alert("Sarcasm");
 				}
+				hideLoading();
 			}
 		</script>
 </html>
